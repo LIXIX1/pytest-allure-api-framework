@@ -1,0 +1,14 @@
+# data/pet_test_data.yaml
+- case_name: "新增宠物并验证状态流转"
+  payload:
+    id: 2001
+    name: "Buddy"
+    status: "available"
+    category:
+      id: 1
+      name: "Dogs"
+    tags:
+      - id: 1
+        name: "friendly"
+  expect_code: 200
+  update_status: "sold"  # 测试数据中指定更新后的状态

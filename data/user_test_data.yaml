@@ -1,0 +1,24 @@
+# data/user_test_data.yaml
+- case_name: "正常流程"
+  payload:
+    id: 1001
+    username: "test_user_1"
+    firstName: "Test"
+    lastName: "User"
+    email: "test1@example.com"
+    password: "password123"
+    phone: "13800138000"
+    userStatus: 1
+  expect_code: 200
+
+- case_name: "特殊字符用户名测试"
+  payload:
+    id: 1002
+    username: "user.dot_test"
+    firstName: "Dot"
+    lastName: "Tester"
+    email: "dot@example.com"
+    password: "password456"
+    phone: "13900139000"
+    userStatus: 0
+  expect_code: 200

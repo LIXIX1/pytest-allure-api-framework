@@ -1,0 +1,10 @@
+# data/order_test_data.yaml
+- case_name: "标准订单状态流转测试"
+  payload:
+    id: 3001
+    petId: 2001
+    quantity: 1
+    status: "placed"      # 初始状态：已下单
+    complete: false
+  expect_code: 200
+  update_status: "delivered"  # 更新后的状态：已发货

@@ -1,0 +1,21 @@
+# config/config.yaml
+
+# 当前运行环境: dev / test / prod
+RUN_ENV: "test"
+
+
+
+
+# config/config.yaml
+ENV_CONFIG:
+  test:
+    BASE_URL: "https://petstore.swagger.io/v2"
+    # 新增登录配置
+    LOGIN_URL: "/user/login"
+    LOGIN_PARAMS:
+      username: "admin"
+      password: "password123"
+  dev:
+    BASE_URL: "http://dev-api.petstore.com/v2"
+    TIMEOUT: 5
+    USER: "dev_user"
