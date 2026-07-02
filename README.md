@@ -1,19 +1,59 @@
 #  优雅的 Pytest + Allure API 自动化测试框架
 
-这是一个基于 Python + Pytest + Requests 构建的轻量级、高扩展性 API 自动化测试框架。它采用分层架构，支持 YAML 数据驱动，并深度定制了 Allure 报告，让接口测试既高效又具备极强的可读性。
+项目简介
+本项目是一个基于 Python 的轻量级接口自动化测试框架。采用 数据驱动 (Data-Driven) 的设计模式，将测试逻辑与测试数据完全分离。目前框架已覆盖 用户(User)、订单(Order) 和 宠物(Pet) 三大核心业务模块的接口测试，并集成了 Allure 生成可视化的测试报告。
+️ 核心技术栈：
+编程语言: Python 3.x
+测试框架: Pytest (>=7.4.0)
+HTTP 请求: Requests (>=2.31.0)
+报告工具: Allure Pytest (>=2.13.2)
+数据格式: YAML (用于管理测试数据和全局配置)
+项目组织架构：
+  my-api-test-framework/
+├── config.yaml              # 全局配置文件
+├── pytest.ini               # Pytest 运行配置
+├── requirements.txt         # 依赖包清单
+├── run_tests.py             # 测试运行入口
+│
+├── test_data/               # 📁 测试数据目录
+│   ├── user_test_data.yaml
+│   ├── order_test_data.yaml
+│   └── pet_test_data.yaml
+│
+└── testcases/               # 📁 测试用例目录
+    ├── test_user.py         
+    ├── test_order_flow.py
+    └── test_pet_flow.py
 
-##  核心特性
-
-- ** 优雅的报告**：封装了 `attach_request_response` 工具函数，自动在 Allure 报告中记录请求和响应报文，告别冗长的 `try-except` 代码块。
-- ** 数据驱动**：测试数据与用例逻辑完全分离，基于 YAML 管理，维护成本极低。
-- ** 专业美化**：支持自定义团队 Logo、报告标题及 Environment 环境信息展示，报告“拿得出手”。
-- **️ 分层架构**：API 层、工具层、用例层严格分离，易于集成 Token 刷新、数据库校验等复杂场景。
-- ** 动态标题**：支持基于 YAML 数据的动态用例标题，避免 Allure Behaviors 视图文字重叠。
-
-## ️ 快速开始
+快速开始
 
 ### 1. 环境准备
-确保已安装 Python 3.8+。建议创建并激活虚拟环境：
-```bash
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+确保已安装 Python 环境，克隆本项目后，在终端执行以下命令安装依赖
+pip install -r requirements.txt
+2. 配置环境
+请修改 config.yaml 文件，填入正确的测试环境 Base URL 和测试账号信息。
+3. 运行测试
+方式一：使用命令行
+# 运行所有模块测试
+pytest
+
+# 运行指定模块 (例如：宠物模块)
+pytest test_pet.py -v -s
+
+# 生成 Allure 结果数据
+pytest --alluredir=./report_data
+方式二：使用运行脚本
+直接运行入口脚本启动测试并且自动生成报告
+python run_tests.py
+4. 查看测试报告
+测试完成后，使用 Allure 生成并打开可视化报告：
+allure serve ./report_data
+5. 核心特性
+数据驱动: 测试用例通过读取 YAML 文件自动循环执行，新增场景只需增加数据行，无需改动代码。
+模块化设计: 按业务线（User/Order/Pet）独立拆分测试脚本与数据文件，结构清晰，易于扩展。
+配置分离: 通过 config.yaml 统一管理多套环境配置，一键切换测试环境。
+精美报告: 深度集成 Allure 报告，支持查看请求详情、响应结果及错误堆栈，方便问题排查。
+6. 如何新增测试用例？
+在对应的 xxx_test_data.yaml 文件中新增一组测试数据。
+在对应的 test_xxx.py 文件中编写测试逻辑，读取 YAML 数据进行断言。
+运行 pytest 即可自动发现并执行新用例。
