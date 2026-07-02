@@ -14,7 +14,16 @@ HTTP 请求: Requests (>=2.31.0)
 ├── pytest.ini               # Pytest 运行配置
 ├── requirements.txt         # 依赖包清单
 ├── run_tests.py             # 测试运行入口
-│
+├── apis/                    # 📁 接口集成目录
+│   ├── user_api.yaml
+│   ├── order_api.yaml
+│   └── pet_api.yaml
+├── config/                    # 📁 全局配置目录
+│   └── config.yaml           # 全局配置文件
+├── test_data/               # 📁 工具目录
+│   ├── allure_helper.yaml
+│   ├── http_client.yaml
+│   └── yaml_loader.yam
 ├── test_data/               # 📁 测试数据目录
 │   ├── user_test_data.yaml
 │   ├── order_test_data.yaml
